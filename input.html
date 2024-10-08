@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inputan</title>
+
+    <style>
+        #tampungText,
+        #tampungText2 {
+            border: 2px solid green;
+            margin-top: 10px;
+            height: 30px;
+            padding: 5px;
+        }
+
+        #tampungText2 {
+            border: 2px solid red;
+        }
+
+        #tampungText3 {
+            margin-top: 10px;
+            border: 2px solid blue;
+            padding: 15px;
+        }
+
+        .newText {
+            background-color: aqua;
+            padding: 10px;
+            margin: 5px;
+            width: fit-content;
+        }
+
+        #tampungText4 {
+            border: 2px solid orange;
+            margin-top: 10px;
+            padding: 15px;
+        }
+
+        /* Tambahan untuk button random background */
+        #randomBackgroundButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+        }
+
+        /* Gaya enhanced */
+        .enhanced {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .enhanced h2 {
+            color: #007bff;
+        }
+
+        .enhanced .newText {
+            background-color: #d1ecf1;
+        }
+
+        .enhanced button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .enhanced button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Tambahan untuk jarak pada tombol Edit dan Hapus */
+        .edit-button,
+        .delete-button {
+            margin-left: 10px; /* Jarak antar tombol */
+            margin-top: 5px; /* Jarak di atas tombol */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Tombol untuk mengganti background -->
+    <button id="randomBackgroundButton" onclick="changeBackground()">Ganti Latar Belakang</button>
+    <button id="toggleStyleButton" onclick="toggleStyle()">On/Off</button>
+
+    <h2>1. Menampilkan nilai inputan ke dalam browser</h2>
+
+    <input type="text" placeholder="Masukan kata..." style="width : 300px" id="inputUser1">
+    <button onclick="kirimInputan1()">Kirim</button>
+
+    <div id="tampungText"></div>
+
+    <br><br><br>
+    <hr>
+
+    <h2>2. Mengolah nilai Inputan (Kalkulator sederhana)</h2>
+
+    <input type="number" id="inputKalkulator1">
+    <input type="number" id="inputKalkulator2">
+    <input type="number" id="inputKalkulator3">
+    <button onclick="tambah()">Tambah</button>
+    <button onclick="kurang()">Kurang</button>
+    <button onclick="kali()">Kali</button>
+    <button onclick="bagi()">Bagi</button>
+
+    <div id="tampungText2"></div>
+
+    <br><br><br>
+    <hr>
+
+    <h2>3. Menampilkan nilai lebih banyak inputan ke dalam browser</h2>
+
+    <input type="text" placeholder="Masukan kata..." style="width : 300px" id="inputUser3">
+    <button onclick="kirimInputan3()">Kirim</button>
+
+    <div id="tampungText3"></div>
+
+    <br><br><br>
+    <hr>
+
+    <h2>4. Menampilkan nilai dan tombol Hapus dan Edit inputan ke dalam browser</h2>
+
+    <input type="text" placeholder="Masukan kata..." style="width : 300px" id="inputUser4">
+    <button onclick="kirimInputan4()">Kirim</button>
+
+    <div id="tampungText4"></div>
+
+    <br><br><br>
+    <hr>
+
+    <script>
+        let enhancedMode = false; // Flag untuk mode enhanced
+
+        // Fungsi untuk mengganti background dengan warna acak
+        function changeBackground() {
+            const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16); // Generate random hex color
+            document.body.style.backgroundColor = randomColor; // Set background color
+        }
+
+        // Fungsi untuk toggle style
+        function toggleStyle() {
+            enhancedMode = !enhancedMode; // Toggle the flag
+            document.body.classList.toggle('enhanced', enhancedMode); // Add or remove the 'enhanced' class
+            const button = document.getElementById('toggleStyleButton');
+            button.textContent = enhancedMode ? 'Off' : 'On'; // Change button text
+        }
+
+        // Menampilkan nilai inputan ke dalam browser
+        function kirimInputan1() {
+            let inputUser1 = document.getElementById("inputUser1").value;
+            let tampungText = document.getElementById("tampungText");
+            tampungText.textContent = inputUser1;
+            document.getElementById("inputUser1").value = "";
+        }
+
+        // Mengolah nilai inputan (Kalkulator sederhana)
+        function tambah() {
+            let inputKalkulator1 = parseFloat(document.getElementById('inputKalkulator1').value);
+            let inputKalkulator2 = parseFloat(document.getElementById('inputKalkulator2').value);
+            let inputKalkulator3 = parseFloat(document.getElementById('inputKalkulator3').value);
+            let tampungText2 = document.getElementById("tampungText2");
+            let hasil = inputKalkulator1 + inputKalkulator2 + inputKalkulator3;
+            tampungText2.innerHTML = hasil;
+            document.getElementById('inputKalkulator1').value = "";
+            document.getElementById('inputKalkulator2').value = "";
+            document.getElementById('inputKalkulator3').value = "";
+        }
+
+        function kurang() {
+            let inputKalkulator1 = parseFloat(document.getElementById('inputKalkulator1').value);
+            let inputKalkulator2 = parseFloat(document.getElementById('inputKalkulator2').value);
+            let inputKalkulator3 = parseFloat(document.getElementById('inputKalkulator3').value);
+            let tampungText2 = document.getElementById("tampungText2");
+            let hasil = inputKalkulator1 - inputKalkulator2 - inputKalkulator3;
+            tampungText2.innerHTML = hasil;
+            document.getElementById('inputKalkulator1').value = "";
+            document.getElementById('inputKalkulator2').value = "";
+            document.getElementById('inputKalkulator3').value = "";
+        }
+
+        function kali() {
+            let inputKalkulator1 = parseFloat(document.getElementById('inputKalkulator1').value);
+            let inputKalkulator2 = parseFloat(document.getElementById('inputKalkulator2').value);
+            let inputKalkulator3 = parseFloat(document.getElementById('inputKalkulator3').value);
+            let tampungText2 = document.getElementById("tampungText2");
+            let hasil = inputKalkulator1 * inputKalkulator2 * inputKalkulator3;
+            tampungText2.innerHTML = hasil;
+            document.getElementById('inputKalkulator1').value = "";
+            document.getElementById('inputKalkulator2').value = "";
+            document.getElementById('inputKalkulator3').value = "";
+        }
+
+        function bagi() {
+            let inputKalkulator1 = parseFloat(document.getElementById('inputKalkulator1').value);
+            let inputKalkulator2 = parseFloat(document.getElementById('inputKalkulator2').value);
+            let inputKalkulator3 = parseFloat(document.getElementById('inputKalkulator3').value);
+            let tampungText2 = document.getElementById("tampungText2");
+            let hasil = inputKalkulator1 / inputKalkulator2 / inputKalkulator3;
+            tampungText2.innerHTML = hasil;
+            document.getElementById('inputKalkulator1').value = "";
+            document.getElementById('inputKalkulator2').value = "";
+            document.getElementById('inputKalkulator3').value = "";
+        }
+
+        // Menampilkan nilai lebih banyak inputan ke dalam browser
+        function kirimInputan3() {
+            let inputUser3 = document.getElementById("inputUser3").value;
+            let newText = document.createElement("p");
+            newText.className = "newText";
+            newText.textContent = inputUser3;
+
+            let tampungText = document.getElementById("tampungText3");
+            tampungText.appendChild(newText);
+            document.getElementById("inputUser3").value = "";
+        }
+
+        // Menampilkan nilai dan tombol Hapus dan Edit inputan ke dalam browser
+        function kirimInputan4() {
+            let inputUser4 = document.getElementById("inputUser4").value;
+            let tampungText4 = document.getElementById("tampungText4");
+
+            let newText = document.createElement('div');
+            newText.classList.add('newText');
+            newText.textContent = inputUser4;
+
+            // Create edit button
+            let editButton = document.createElement('button');
+            editButton.textContent = "Edit";
+            editButton.classList.add('edit-button'); // Tambahkan class untuk styling
+
+            // Function to handle editing the text
+            editButton.onclick = function () {
+                let editInput = prompt("Edit text:", newText.firstChild.textContent); // Use newText's text content
+                if (editInput !== null) {
+                    newText.firstChild.textContent = editInput; // Update text content
+                }
+            };
+
+            // Create delete button
+            let deleteButton = document.createElement('button');
+            deleteButton.textContent = "Hapus";
+            deleteButton.classList.add('delete-button'); // Tambahkan class untuk styling
+
+            // Function to handle deleting the text
+            deleteButton.onclick = function () {
+                tampungText4.removeChild(newText); // Remove text on delete
+            };
+
+            // Append buttons to newText
+            newText.appendChild(editButton);
+            newText.appendChild(deleteButton);
+            tampungText4.appendChild(newText);
+            document.getElementById("inputUser4").value = "";
+        }
+    </script>
+</body>
+
+</html>
